@@ -42,5 +42,9 @@ Pod::Spec.new do |spec|
   source_files = 'ReactCommon/yoga/**/*.{cpp,h}'
   source_files = File.join('ReactCommon/yoga', source_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
   spec.source_files = source_files
-  spec.public_header_files = 'yoga/Yoga.h', 'yoga/YGEnums.h', 'yoga/YGMacros.h'
+  
+  # Fix for algorithm file not found error.
+  header_files = 'yoga/{Yoga,YGEnums,YGMacros}.h'
+  header_files = File.join('ReactCommon/yoga', header_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+  spec.public_header_files = header_files
 end
